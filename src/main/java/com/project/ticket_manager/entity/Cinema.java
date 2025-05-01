@@ -1,8 +1,6 @@
 package com.project.ticket_manager.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Data
@@ -14,6 +12,8 @@ import lombok.*;
 public class Cinema {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cinemaId;
+
     private String name;
 }
