@@ -20,12 +20,13 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/api/"
+                                "/login",
+                                "/welcome"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .oauth2Login(config -> config
-                        .defaultSuccessUrl("/api/welcome")
+                        .defaultSuccessUrl("/welcome", true)
                         .userInfoEndpoint(userInfo -> userInfo.userService(customOAuthUserService))
                 )
                 .logout(logout -> logout
