@@ -30,6 +30,9 @@ public class Ticket {
     @Column(nullable = false)
     private LocalDateTime ticketDateTime;
 
+    @Column
+    private Boolean bought;
+
     @Column(nullable = false)
     private Integer rowNumber;
 
