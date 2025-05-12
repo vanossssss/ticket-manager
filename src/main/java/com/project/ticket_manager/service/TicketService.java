@@ -5,6 +5,7 @@ import com.project.ticket_manager.entity.Ticket;
 import com.project.ticket_manager.entity.User;
 import com.project.ticket_manager.repository.TicketRepository;
 import com.project.ticket_manager.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,6 +17,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class TicketService {
 
     private static final String EMAIL_ATTRIBUTE= "email";
