@@ -31,7 +31,7 @@ public class Ticket {
     private LocalDateTime ticketDateTime;
 
     @Column
-    private Boolean bought;
+    private Integer hall;
 
     @Column(nullable = false)
     private Integer rowNumber;

@@ -23,7 +23,7 @@ public class TicketsController {
     private final UserRepository userRepository;
     private final TicketService ticketService;
 
-    private final String EMAIL_ATTRIBUTE = "email";
+    private static final String EMAIL_ATTRIBUTE = "email";
 
     @GetMapping("/tickets")
     public String tickets(Model model) {
@@ -39,8 +39,8 @@ public class TicketsController {
         return "tickets";
     }
 
-    @PostMapping("/cancel/{id}")
-    public String cancelTicket(@PathVariable Long id) {
+    @PostMapping("/tickets/cancel/{id}")
+    public String cancel(@PathVariable Long id) {
         ticketService.cancelTicketById(id);
         return "redirect:/tickets";
     }

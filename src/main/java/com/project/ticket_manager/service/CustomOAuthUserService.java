@@ -19,7 +19,7 @@ import java.util.Optional;
 public class CustomOAuthUserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
     private final UserRepository userRepository;
-    private final String EMAIL_ATTRIBUTE = "email";
+    private static final String EMAIL_ATTRIBUTE = "email";
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {

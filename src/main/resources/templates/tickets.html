@@ -40,7 +40,7 @@
                     <td th:text="${ticket.getRowNumber}"></td>
                     <td th:text="${ticket.getPlaceNumber}"></td>
                     <td>
-                        <form th:action="@{/cancel/{id}(id=${ticket.getTicketId()})}" method="post">
+                        <form th:action="@{tickets/cancel/{id}(id=${ticket.getTicketId()})}" method="post">
                             <button type="submit" class="btn btn-danger btn-sm">
                                 Отменить
                             </button>
