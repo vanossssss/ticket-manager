@@ -2,6 +2,7 @@ package com.project.ticket_manager.service;
 
 import com.project.ticket_manager.entity.Cinema;
 import com.project.ticket_manager.repository.CinemaRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class CinemaService {
 
     private final CinemaRepository cinemaRepository;
