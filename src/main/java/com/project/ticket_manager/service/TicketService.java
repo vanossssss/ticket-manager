@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,5 +17,14 @@ public class TicketService {
 
     public List<Ticket> getTicketsByUser(User user) {
         return ticketRepository.findByUser(user);
+    }
+
+    public void cancelTicketById(Long id) {
+        Optional<Ticket> boughtTicket = ticketRepository.findById(id);
+
+        boughtTicket.ifPresent(ticket -> {
+            ticket.setUser(null);
+            ticketRepository.save(ticket);
+        });
     }
 }

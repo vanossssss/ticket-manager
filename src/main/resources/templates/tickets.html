@@ -30,6 +30,7 @@
                     <th scope="col">Дата и время</th>
                     <th scope="col">Ряд</th>
                     <th scope="col">Место</th>
+                    <th scope="col" class="actions-column">Действия</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,6 +39,13 @@
                     <td th:text="${#temporals.format(ticket.getTicketDateTime(), 'dd.MM.yyyy HH:mm')}"></td>
                     <td th:text="${ticket.getRowNumber}"></td>
                     <td th:text="${ticket.getPlaceNumber}"></td>
+                    <td>
+                        <form th:action="@{/cancel/{id}(id=${ticket.getTicketId()})}" method="post">
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                Отменить
+                            </button>
+                        </form>
+                    </td>
                 </tr>
             </tbody>
         </table>
