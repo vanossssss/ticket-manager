@@ -25,7 +25,12 @@ public class TicketService {
     private final UserRepository userRepository;
     private final TicketRepository ticketRepository;
 
-    public List<Ticket> getTicketsByUser(User user) {
+    public List<Ticket> getTicketsByUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        DefaultOAuth2User oAuth2User = (DefaultOAuth2User) authentication.getPrincipal();
+        String email = oAuth2User.getAttribute(EMAIL_ATTRIBUTE);
+        User user = userRepository.findByEmail(email).get();
+
         return ticketRepository.findByUser(user);
     }
 
@@ -36,7 +41,7 @@ public class TicketService {
     public void buyTicket(Long ticketId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         DefaultOAuth2User oAuth2User = (DefaultOAuth2User) authentication.getPrincipal();
-        String email = oAuth2User.getAttributes().get(EMAIL_ATTRIBUTE).toString();
+        String email = oAuth2User.getAttribute(EMAIL_ATTRIBUTE);
         User user = userRepository.findByEmail(email).get();
 
         Ticket ticket = ticketRepository.findById(ticketId).get();
