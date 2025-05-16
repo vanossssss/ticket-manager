@@ -31,15 +31,15 @@
 
         <div class="list-group" th:unless="${cinemas.isEmpty()}">
             <a th:each="cinema : ${cinemas}"
-               th:href="@{/cinemas/{id}(id=${cinema.getCinemaId()})}"
+               th:href="@{/cinemas/{id}(id=${cinema.cinemaId()})}"
                class="list-group-item list-group-item-action cinema-item">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <h5 th:text="${cinema.getName()}"></h5>
-                        <small class="text-muted" th:text="${cinema.getGenre()}"></small>
+                        <h5 th:text="${cinema.name()}"></h5>
+                        <small class="text-muted" th:text="${cinema.genre()}"></small>
                     </div>
                     <span class="badge bg-primary rounded-pill" 
-                          th:text="${cinema.getPremiere()}"></span>
+                          th:text="${cinema.premiere()}"></span>
                 </div>
             </a>
         </div>

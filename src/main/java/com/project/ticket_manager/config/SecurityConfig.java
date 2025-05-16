@@ -30,10 +30,10 @@ public class SecurityConfig {
                         .userInfoEndpoint(userInfo -> userInfo.userService(customOAuthUserService))
                 )
                 .logout(logout -> logout
-                                .logoutUrl("/logout")
-                                .logoutSuccessUrl("/login")
-                                .invalidateHttpSession(true)
-                                .deleteCookies("JSESSIONID")
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
                 ).csrf(Customizer.withDefaults());
 
         SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_GLOBAL);

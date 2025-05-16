@@ -1,5 +1,7 @@
 package com.project.ticket_manager.service;
 
+import com.project.ticket_manager.Mapper.TicketMapper;
+import com.project.ticket_manager.dto.TicketDto;
 import com.project.ticket_manager.entity.Cinema;
 import com.project.ticket_manager.entity.Ticket;
 import com.project.ticket_manager.entity.User;
@@ -24,6 +26,7 @@ public class TicketService {
 
     private final UserRepository userRepository;
     private final TicketRepository ticketRepository;
+    private final TicketMapper ticketMapper;
 
     public List<Ticket> getTicketsByUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -34,11 +37,23 @@ public class TicketService {
         return ticketRepository.findByUser(user);
     }
 
+    public List<TicketDto> getTicketDtoListByUser() {
+        return ticketMapper.toTicketDtoList(getTicketsByUser());
+    }
+
     public List<Ticket> getNotBoughtTicketsByCinema(Cinema cinema) {
         return ticketRepository.findNotBoughtTicketsByCinemaId(cinema.getCinemaId());
     }
 
+    public List<TicketDto> getNotBoughtTicketDtoByCinema(Cinema cinema) {
+        return ticketMapper.toTicketDtoList(getNotBoughtTicketsByCinema(cinema));
+    }
+
     public void buyTicket(Long ticketId) {
+//        Ticket ticket = ticketRepository.findById(ticketId).get();
+//        Optional<User> user = ticket.getUser();
+
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         DefaultOAuth2User oAuth2User = (DefaultOAuth2User) authentication.getPrincipal();
         String email = oAuth2User.getAttribute(EMAIL_ATTRIBUTE);

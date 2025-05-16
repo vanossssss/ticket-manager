@@ -33,34 +33,34 @@
             <!-- Верхняя часть с информацией о фильме -->
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img th:src="@{${'/images/' + cinema.getPosterUrl()}}"
+                    <img th:src="@{${'/images/' + cinema.posterUrl()}}"
                          class="img-fluid rounded cinema-poster"
                          alt="Постер фильма">
                 </div>
                 <div class="col-md-8 ps-md-4">
-                    <h1 class="card-title mb-3" th:text="${cinema.getName()}"></h1>
+                    <h1 class="card-title mb-3" th:text="${cinema.name()}"></h1>
                     
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <p><strong>Жанр:</strong> 
-                                <span th:text="${cinema.getGenre()}"></span>
+                                <span th:text="${cinema.genre()}"></span>
                             </p>
                             <p><strong>Продолжительность:</strong> 
-                                <span th:text="${cinema.getDuration()}"></span>
+                                <span th:text="${cinema.duration()}"></span>
                             </p>
                         </div>
                         <div class="col-md-6">
                             <p><strong>Рейтинг:</strong> 
-                                <span class="badge bg-danger" th:text="${cinema.getRating()}"></span>
+                                <span class="badge bg-danger" th:text="${cinema.rating()}"></span>
                             </p>
                             <p><strong>Режиссер:</strong> 
-                                <span th:text="${cinema.getDirector()}"></span>
+                                <span th:text="${cinema.director()}"></span>
                             </p>
                         </div>
                     </div>
                     
                     <h5>Описание:</h5>
-                    <p class="card-text" th:text="${cinema.getDescription()}"></p>
+                    <p class="card-text" th:text="${cinema.description()}"></p>
                 </div>
             </div>
 
@@ -76,7 +76,6 @@
                     <table class="table table-hover align-middle">
                         <thead class="table-dark">
                             <tr>
-                                <th>Кинотеатр</th>
                                 <th>Дата и время</th>
                                 <th>Зал</th>
                                 <th>Ряд</th>
@@ -86,13 +85,12 @@
                         </thead>
                         <tbody>
                             <tr th:each="ticket : ${tickets}">
-                                <td th:text="${ticket.getCinema().getName()}"></td>
-                                <td th:text="${#temporals.format(ticket.getTicketDateTime(), 'dd.MM.yyyy HH:mm')}"></td>
-                                <td th:text="${ticket.getHall()}"></td>
-                                <td th:text="${ticket.getRowNumber()}"></td>
-                                <td th:text="${ticket.getPlaceNumber()}"></td>
+                                <td th:text="${#temporals.format(ticket.ticketDateTime(), 'dd.MM.yyyy HH:mm')}"></td>
+                                <td th:text="${ticket.hall()}"></td>
+                                <td th:text="${ticket.rowNumber()}"></td>
+                                <td th:text="${ticket.placeNumber()}"></td>
                                 <td>
-                                    <form th:action="@{/cinemas/{id1}/buy/{id2}(id1=${cinema.getCinemaId()}, id2=${ticket.getTicketId()})}"
+                                    <form th:action="@{/cinemas/{id1}/buy/{id2}(id1=${cinema.cinemaId()}, id2=${ticket.ticketId()})}"
                                           method="post">
                                         <button type="submit" 
                                                 class="btn btn-success btn-sm buy-btn">

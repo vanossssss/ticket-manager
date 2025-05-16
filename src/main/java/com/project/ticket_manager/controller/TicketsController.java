@@ -1,6 +1,6 @@
 package com.project.ticket_manager.controller;
 
-import com.project.ticket_manager.entity.Ticket;
+import com.project.ticket_manager.dto.TicketDto;
 import com.project.ticket_manager.service.TicketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -18,15 +18,15 @@ public class TicketsController {
     private final TicketService ticketService;
 
     @GetMapping("/tickets")
-    public String tickets(Model model) {
-        List<Ticket> tickets = ticketService.getTicketsByUser();
-        model.addAttribute("tickets", tickets);
+    public String viewTicketsBoughtByUser(Model model) {
+        List<TicketDto> ticketDtoList = ticketService.getTicketDtoListByUser();
+        model.addAttribute("tickets", ticketDtoList);
 
         return "tickets";
     }
 
     @PostMapping("/tickets/cancel/{id}")
-    public String cancel(@PathVariable Long id) {
+    public String cancelTicket(@PathVariable Long id) {
         ticketService.cancelTicketById(id);
         return "redirect:/tickets";
     }

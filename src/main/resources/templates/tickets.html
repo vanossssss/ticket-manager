@@ -26,7 +26,7 @@
         <table class="table table-striped table-hover">
             <thead class="status-header">
                 <tr>
-                    <th scope="col">Кинотеатр</th>
+                    <th scope="col">Название фильма</th>
                     <th scope="col">Дата и время</th>
                     <th scope="col">Ряд</th>
                     <th scope="col">Место</th>
@@ -35,12 +35,12 @@
             </thead>
             <tbody>
                 <tr th:each="ticket : ${tickets}">
-                    <td th:text="${ticket.getCinema().getName()}"></td>
-                    <td th:text="${#temporals.format(ticket.getTicketDateTime(), 'dd.MM.yyyy HH:mm')}"></td>
-                    <td th:text="${ticket.getRowNumber}"></td>
-                    <td th:text="${ticket.getPlaceNumber}"></td>
+                    <td th:text="${ticket.cinemaName()}"></td>
+                    <td th:text="${#temporals.format(ticket.ticketDateTime(), 'dd.MM.yyyy HH:mm')}"></td>
+                    <td th:text="${ticket.rowNumber}"></td>
+                    <td th:text="${ticket.placeNumber}"></td>
                     <td>
-                        <form th:action="@{tickets/cancel/{id}(id=${ticket.getTicketId()})}" method="post">
+                        <form th:action="@{tickets/cancel/{id}(id=${ticket.ticketId()})}" method="post">
                             <button type="submit" class="btn btn-danger btn-sm">
                                 Отменить
                             </button>
