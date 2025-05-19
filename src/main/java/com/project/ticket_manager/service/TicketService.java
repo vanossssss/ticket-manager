@@ -28,6 +28,7 @@ public class TicketService {
     private final TicketRepository ticketRepository;
     private final TicketMapper ticketMapper;
 
+    //вызов этого метода происходит, когда user не может быть null
     public List<Ticket> getTicketsByUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         DefaultOAuth2User oAuth2User = (DefaultOAuth2User) authentication.getPrincipal();
@@ -49,19 +50,20 @@ public class TicketService {
         return ticketMapper.toTicketDtoList(getNotBoughtTicketsByCinema(cinema));
     }
 
+    //вызов этого метода происходит, когда ticket и user не могут быть null
     public void buyTicket(Long ticketId) {
-//        Ticket ticket = ticketRepository.findById(ticketId).get();
-//        Optional<User> user = ticket.getUser();
-
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        DefaultOAuth2User oAuth2User = (DefaultOAuth2User) authentication.getPrincipal();
-        String email = oAuth2User.getAttribute(EMAIL_ATTRIBUTE);
-        User user = userRepository.findByEmail(email).get();
-
         Ticket ticket = ticketRepository.findById(ticketId).get();
-        ticket.setUser(user);
-        ticketRepository.save(ticket);
+        Optional<User> ticketUser = Optional.ofNullable(ticket.getUser());
+
+        if(ticketUser.isEmpty()) {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            DefaultOAuth2User oAuth2User = (DefaultOAuth2User) authentication.getPrincipal();
+            String email = oAuth2User.getAttribute(EMAIL_ATTRIBUTE);
+            User currentUser = userRepository.findByEmail(email).get();
+
+            ticket.setUser(currentUser);
+            ticketRepository.save(ticket);
+        }
     }
 
     public void cancelTicketById(Long id) {
