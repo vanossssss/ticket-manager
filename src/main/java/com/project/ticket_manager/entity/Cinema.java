@@ -1,13 +1,22 @@
 package com.project.ticket_manager.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
 @Entity
 @Table(name = "cinemas")
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class Cinema {
 
     @Id

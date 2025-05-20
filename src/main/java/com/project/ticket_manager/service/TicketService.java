@@ -2,7 +2,6 @@ package com.project.ticket_manager.service;
 
 import com.project.ticket_manager.Mapper.TicketMapper;
 import com.project.ticket_manager.dto.TicketDto;
-import com.project.ticket_manager.entity.Cinema;
 import com.project.ticket_manager.entity.Ticket;
 import com.project.ticket_manager.entity.User;
 import com.project.ticket_manager.repository.TicketRepository;
@@ -13,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +29,7 @@ public class TicketService {
     private final TicketMapper ticketMapper;
 
     //вызов этого метода происходит, когда user не может быть null
-    public List<Ticket> getTicketsByUser() {
+    public List<Ticket> getTicketListByUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         DefaultOAuth2User oAuth2User = (DefaultOAuth2User) authentication.getPrincipal();
         String email = oAuth2User.getAttribute(EMAIL_ATTRIBUTE);
@@ -39,15 +39,12 @@ public class TicketService {
     }
 
     public List<TicketDto> getTicketDtoListByUser() {
-        return ticketMapper.toTicketDtoList(getTicketsByUser());
+        return ticketMapper.toTicketDtoList(getTicketListByUser());
     }
 
-    public List<Ticket> getNotBoughtTicketsByCinema(Cinema cinema) {
-        return ticketRepository.findNotBoughtTicketsByCinemaId(cinema.getCinemaId());
-    }
-
-    public List<TicketDto> getNotBoughtTicketDtoByCinema(Cinema cinema) {
-        return ticketMapper.toTicketDtoList(getNotBoughtTicketsByCinema(cinema));
+    public void getViewTicketsBoughtByUser(Model model) {
+        List<TicketDto> ticketDtoList = getTicketDtoListByUser();
+        model.addAttribute("tickets", ticketDtoList);
     }
 
     //вызов этого метода происходит, когда ticket и user не могут быть null
