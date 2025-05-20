@@ -21,5 +21,5 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
                     "WHERE cinema_id = :cinema_id AND user_id is NULL",
             nativeQuery = true
     )
-    List<Ticket> findNotBoughtTicketsByCinemaId(@Param("cinema_id") Long cinemaId);
+    List<Ticket> findAvailableTicketsByCinemaId(@Param("cinema_id") Long cinemaId);
 }

@@ -1,5 +1,7 @@
 package com.project.ticket_manager.controller;
 
+import com.project.ticket_manager.dto.CinemaDto;
+import com.project.ticket_manager.dto.TicketDto;
 import com.project.ticket_manager.service.CinemaService;
 import com.project.ticket_manager.service.TicketService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/cinemas")
@@ -20,7 +24,7 @@ public class CinemasController {
 
     @GetMapping
     public String viewCinemas(Model model) {
-        cinemaService.getViewCinema(model);
+        cinemaService.getViewCinemas(model);
 
         return "cinemas";
     }
@@ -35,7 +39,7 @@ public class CinemasController {
     @PostMapping("/{cinemaId}/buy/{ticketId}")
     public String buyTicket(@PathVariable Long cinemaId,
                             @PathVariable Long ticketId) {
-        ticketService.buyTicket(ticketId);
+        ticketService.buyCurrentUserTicket(ticketId);
 
         return "redirect:/cinemas/" + cinemaId;
     }
