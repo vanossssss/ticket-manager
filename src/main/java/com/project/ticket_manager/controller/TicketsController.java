@@ -1,6 +1,5 @@
 package com.project.ticket_manager.controller;
 
-import com.project.ticket_manager.entity.User;
 import com.project.ticket_manager.service.TicketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
