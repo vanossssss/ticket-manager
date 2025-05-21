@@ -1,6 +1,6 @@
 package com.project.ticket_manager.service;
 
-import com.project.ticket_manager.Mapper.TicketMapper;
+import com.project.ticket_manager.mapper.TicketMapper;
 import com.project.ticket_manager.dto.TicketDto;
 import com.project.ticket_manager.entity.Ticket;
 import com.project.ticket_manager.entity.User;

@@ -1,7 +1,7 @@
 package com.project.ticket_manager.service;
 
-import com.project.ticket_manager.Mapper.CinemaMapper;
-import com.project.ticket_manager.Mapper.TicketMapper;
+import com.project.ticket_manager.mapper.CinemaMapper;
+import com.project.ticket_manager.mapper.TicketMapper;
 import com.project.ticket_manager.dto.CinemaDto;
 import com.project.ticket_manager.dto.TicketDto;
 import com.project.ticket_manager.entity.Cinema;

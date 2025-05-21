@@ -1,4 +1,4 @@
-package com.project.ticket_manager.Mapper;
+package com.project.ticket_manager.mapper;
 
 import com.project.ticket_manager.dto.CinemaDto;
 import com.project.ticket_manager.entity.Cinema;
